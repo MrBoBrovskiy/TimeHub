@@ -1,0 +1,160 @@
+/* Общие цветовые переменные (так удобнее менять всё в одном месте) */
+:root {
+  --bg-color: #121212;         /* основной фон */
+  --container-bg: #1e1e1e;     /* фон контейнеров/блоков */
+  --text-color: #ffffff;       /* основной цвет текста */
+  --secondary-text: #cccccc;   /* второстепенный текст */
+  --accent-color: #ff9800;     /* акцент (яркий) цвет, например оранжевый */
+  --border-color: #2c2c2c;     /* цвет границы/линий */
+  --radius: 8px;               /* радиус скругления */
+  --box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Helvetica Neue', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  height: 100%;
+}
+
+/* Основной контейнер, чтобы всё располагалось по центру и не прилипало к краям */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;  /* можно center, но тогда контент будет по центру вертикально, что иногда неудобно */
+  padding: 30px;
+}
+
+/* Обёртка */
+.container {
+  max-width: 600px;
+  width: 100%;
+  background-color: var(--container-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--box-shadow);
+  padding: 20px;
+}
+
+/* Заголовки */
+h1, h2 {
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Блоки таймеров */
+.timer-section {
+  margin: 20px 0;
+  text-align: center;
+  background-color: var(--bg-color);
+  border-radius: var(--radius);
+  padding: 15px 10px;
+  box-shadow: var(--box-shadow);
+}
+
+/* Отображение времени - делаем покрупнее */
+.timer-display {
+  font-size: 2.5rem;
+  margin: 10px 0;
+}
+
+/* Кнопки */
+.buttons button,
+.timer-section button {
+  background-color: var(--accent-color);
+  color: #000;  /* контраст с оранжевым */
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.buttons button:disabled,
+.timer-section button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.buttons button:hover:not(:disabled),
+.timer-section button:hover:not(:disabled) {
+  background-color: #ffac33; /* чуть светлее для эффекта hover */
+}
+
+.buttons button:active:not(:disabled),
+.timer-section button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* Раздел статистики */
+.stats-section {
+  margin-top: 30px;
+  background-color: var(--bg-color);
+  border-radius: var(--radius);
+  padding: 15px;
+  box-shadow: var(--box-shadow);
+}
+
+#week-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+#week-table th,
+#week-table td {
+  text-align: center;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+}
+
+#week-table thead {
+  background-color: #2a2a2a;
+}
+
+#week-table th {
+  color: var(--secondary-text);
+  font-weight: 500;
+}
+
+#week-table tbody tr:nth-child(even) {
+  background-color: #1c1c1c; /* слегка отличаем чётные строки */
+}
+
+#week-table tbody td {
+  color: var(--text-color);
+}
+
+/* Сделаем небольшое расстояние над таблицей */
+.stats-section h2 {
+  margin-bottom: 15px;
+}
+.reset-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.reset-btn {
+  background-color: #d32f2f; /* Красный цвет */
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  box-shadow: var(--box-shadow);
+}
+
+.reset-btn:hover {
+  background-color: #f44336; /* чуть светлее красный при наведении */
+}
+
+.reset-btn:active {
+  transform: scale(0.97);
+}

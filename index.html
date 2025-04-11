@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тайм-трекер рабочего дня</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Тайм-трекер</h1>
+
+    <!-- Отображение текущего "рабочего" времени -->
+    <div class="timer-section">
+      <h2>Рабочее время</h2>
+      <div id="work-timer" class="timer-display">00:00:00</div>
+      <div class="buttons">
+        <button id="start-work-btn">Начать рабочий день</button>
+        <button id="stop-work-btn" disabled>Закончить рабочий день</button>
+      </div>
+    </div>
+
+    <!-- Отображение текущего "обеденного" времени -->
+    <div class="timer-section">
+      <h2>Время обеда</h2>
+      <div id="lunch-timer" class="timer-display">00:00:00</div>
+      <div class="buttons">
+        <button id="start-lunch-btn" disabled>Начать обед</button>
+        <button id="end-lunch-btn" disabled>Закончить обед</button>
+      </div>
+    </div>
+
+    <!-- Раздел со статистикой за неделю -->
+    <div class="stats-section">
+      <h2>Статистика за неделю</h2>
+      <table id="week-table" border="1" cellpadding="5">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Рабочее время</th>
+            <th>Обеденное время</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Дни недели будут подставляться динамически скриптом -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="stats-section">
+  <h2>Статистика за неделю</h2>
+  <table id="week-table" border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Рабочее время</th>
+        <th>Обеденное время</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Заполняется динамически -->
+    </tbody>
+  </table>
+
+  <!-- Кнопка сброса всех данных -->
+  <div class="reset-container">
+    <button id="reset-btn" class="reset-btn">Сбросить все данные</button>
+  </div>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
