@@ -297,3 +297,128 @@ resetBtn.addEventListener('click', () => {
     renderWeekTable();
   }
 });
+
+/*******************************
+ * БЛОК: УПРАВЛЕНИЕ ЗАДАЧАМИ
+ ******************************/
+
+// 1. Селекторы
+const taskInput = document.getElementById('task-input');
+const addTaskBtn = document.getElementById('add-task-btn');
+const tasksTableBody = document.querySelector('#tasks-table tbody');
+const clearCompletedBtn = document.getElementById('clear-completed-btn');
+
+// 2. Загрузка задач из localStorage
+function loadTasks() {
+  const tasksJson = localStorage.getItem('taskData');
+  return tasksJson ? JSON.parse(tasksJson) : [];
+}
+
+// 3. Сохранение задач в localStorage
+function saveTasks(tasks) {
+  localStorage.setItem('taskData', JSON.stringify(tasks));
+}
+
+// 4. Рендер таблицы с задачами
+function renderTasks() {
+  const tasks = loadTasks();
+
+  // Очищаем текущие строки
+  tasksTableBody.innerHTML = '';
+
+  tasks.forEach((task) => {
+    // Создаём строку
+    const row = document.createElement('tr');
+
+    // 1) Ячейка с чекбоксом
+    const checkboxTd = document.createElement('td');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = task.completed;
+    checkbox.addEventListener('change', () => {
+      // Изменяем статус задачи
+      task.completed = checkbox.checked;
+      saveTasks(tasks);
+      // Можно визуально помечать выполненные
+      textTd.style.textDecoration = task.completed ? 'line-through' : 'none';
+    });
+    checkboxTd.appendChild(checkbox);
+    row.appendChild(checkboxTd);
+
+    // 2) Ячейка с текстом задачи
+    const textTd = document.createElement('td');
+    textTd.textContent = task.text;
+    if (task.completed) {
+      textTd.style.textDecoration = 'line-through';
+    }
+    row.appendChild(textTd);
+
+    // 3) Ячейка с кнопкой "Удалить"
+    const deleteTd = document.createElement('td');
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Удалить';
+    deleteBtn.style.backgroundColor = '#555';
+    deleteBtn.style.color = '#fff';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.borderRadius = '4px';
+    deleteBtn.style.padding = '5px 10px';
+    deleteBtn.style.cursor = 'pointer';
+
+    deleteBtn.addEventListener('click', () => {
+      // Удаляем задачу из массива
+      const index = tasks.findIndex(t => t.id === task.id);
+      if (index !== -1) {
+        tasks.splice(index, 1);
+        saveTasks(tasks);
+        renderTasks(); // Перерисовываем
+      }
+    });
+
+    deleteTd.appendChild(deleteBtn);
+    row.appendChild(deleteTd);
+
+    tasksTableBody.appendChild(row);
+  });
+}
+
+// 5. Событие на кнопку "Добавить задачу"
+addTaskBtn.addEventListener('click', () => {
+  const text = taskInput.value.trim();
+  if (!text) return; // если пустой ввод - не добавляем
+
+  // Загружаем текущий массив
+  const tasks = loadTasks();
+
+  // Создаём новую задачу
+  const newTask = {
+    id: Date.now(), // уникальный ID (на коленке)
+    text,
+    completed: false
+  };
+
+  // Добавляем и сохраняем
+  tasks.push(newTask);
+  saveTasks(tasks);
+
+  // Очищаем поле ввода
+  taskInput.value = '';
+
+  // Обновляем отображение
+  renderTasks();
+});
+
+// 6. "Удалить все выполненные"
+clearCompletedBtn.addEventListener('click', () => {
+  const confirmation = confirm("Удалить ВСЕ выполненные задачи?");
+  if (confirmation) {
+    let tasks = loadTasks();
+    tasks = tasks.filter(task => !task.completed); // Оставляем только невыполненные
+    saveTasks(tasks);
+    renderTasks();
+  }
+});
+
+// 7. При загрузке страницы рендерим существующие задачи
+window.addEventListener('load', () => {
+  renderTasks();
+});

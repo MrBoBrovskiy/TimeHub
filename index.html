@@ -7,8 +7,11 @@
 </head>
 <body>
   <div class="container">
-    <h1>Тайм-трекер</h1>
-
+    <h1>Time Hub</h1>
+    <!-- Ссылка, чтобы вернуться на главную страницу (тайм-трекер) -->
+    <div style="text-align:center; margin-bottom: 20px;">
+      <a href="board.html" class="back-link" style="color: var(--accent-color);">Перейти к Таск-менеджеру</a>
+    </div>
     <!-- Отображение текущего "рабочего" времени -->
     <div class="timer-section">
       <h2>Рабочее время</h2>
@@ -65,6 +68,32 @@
   <div class="reset-container">
     <button id="reset-btn" class="reset-btn">Сбросить все данные</button>
   </div>
+</div>
+
+  <!-- to-do лист -->
+
+  <div class="tasks-section">
+  <h2>Задачи на сегодня</h2>
+  <div class="task-input">
+    <input type="text" id="task-input" placeholder="Опиши задачу...">
+    <button id="add-task-btn">Добавить задачу</button>
+  </div>
+
+  <table id="tasks-table">
+    <thead>
+      <tr>
+        <th>Сделано</th>
+        <th>Описание</th>
+        <th>Удалить</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Список задач будет тут -->
+    </tbody>
+  </table>
+
+  <!-- Кнопка для очистки всех выполненных задач -->
+  <button id="clear-completed-btn" class="clear-completed-btn">Удалить все выполненные</button>
 </div>
 
 
