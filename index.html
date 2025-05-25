@@ -1,19 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <title>Тайм-трекер рабочего дня</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Time Hub</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
+<div class="container" style="height: 100vh;">
+  <!-- Левая колонка (Рабочее время + Время обеда + Сброс) -->
+  <div class="left-column">
     <h1>Time Hub</h1>
-    <!-- Ссылка, чтобы вернуться на главную страницу (тайм-трекер) -->
-    <div style="text-align:center; margin-bottom: 20px;">
-      <a href="board.html" class="back-link" style="color: var(--accent-color);">Перейти к Таск-менеджеру</a>
-    </div>
-    <!-- Отображение текущего "рабочего" времени -->
-    <div class="timer-section">
+      <div class="timer-section">
       <h2>Рабочее время</h2>
       <div id="work-timer" class="timer-display">00:00:00</div>
       <div class="buttons">
@@ -22,7 +19,6 @@
       </div>
     </div>
 
-    <!-- Отображение текущего "обеденного" времени -->
     <div class="timer-section">
       <h2>Время обеда</h2>
       <div id="lunch-timer" class="timer-display">00:00:00</div>
@@ -31,71 +27,57 @@
         <button id="end-lunch-btn" disabled>Закончить обед</button>
       </div>
     </div>
+<div class="today-work-time">
+  <p>Сегодня отработано: <span id="today-work-duration">--:--:--</span></p>
+</div>
 
-    <!-- Раздел со статистикой за неделю -->
-    <div class="stats-section">
-      <h2>Статистика за неделю</h2>
-      <table id="week-table" border="1" cellpadding="5">
+    <div style="text-align: center; margin: 15px 0;">
+      <button id="reset-btn" class="reset-btn">Сбросить все данные</button>
+    </div>
+  </div>
+
+  <!-- Средняя колонка (Калькулятор) -->
+  <div class="mid-column">
+    <div class="calc-section">
+      <h2>Калькулятор 1/3 и 2/3</h2>
+      <div class="calc-form">
+        <input type="number" id="calc-input" placeholder="Введите число..." />
+      </div>
+      <div class="calc-results">
+        <p>Одна треть: <span id="calc-one-third">—</span></p>
+        <p>Две трети: <span id="calc-two-thirds">—</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Правая колонка (Задачи на сегодня) -->
+  <div class="right-column">
+    <div class="tasks-section">
+      <h2>Задачи на сегодня</h2>
+      <div class="task-input">
+        <input type="text" id="task-input" placeholder="Опиши задачу..." />
+        <button id="add-task-btn">Добавить задачу</button>
+      </div>
+
+      <table id="tasks-table">
         <thead>
           <tr>
-            <th>Дата</th>
-            <th>Рабочее время</th>
-            <th>Обеденное время</th>
+            <th>Сделано</th>
+            <th>Описание</th>
+            <th>Удалить</th>
           </tr>
         </thead>
         <tbody>
-          <!-- Дни недели будут подставляться динамически скриптом -->
+          <!-- Динамически подставляется в script.js -->
         </tbody>
       </table>
+
+      <button id="clear-completed-btn" class="clear-completed-btn">
+        Удалить все выполненные
+      </button>
     </div>
   </div>
-  <div class="stats-section">
-  <h2>Статистика за неделю</h2>
-  <table id="week-table" border="1" cellpadding="5">
-    <thead>
-      <tr>
-        <th>Дата</th>
-        <th>Рабочее время</th>
-        <th>Обеденное время</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Заполняется динамически -->
-    </tbody>
-  </table>
-
-  <!-- Кнопка сброса всех данных -->
-  <div class="reset-container">
-    <button id="reset-btn" class="reset-btn">Сбросить все данные</button>
-  </div>
 </div>
-
-  <!-- to-do лист -->
-
-  <div class="tasks-section">
-  <h2>Задачи на сегодня</h2>
-  <div class="task-input">
-    <input type="text" id="task-input" placeholder="Опиши задачу...">
-    <button id="add-task-btn">Добавить задачу</button>
-  </div>
-
-  <table id="tasks-table">
-    <thead>
-      <tr>
-        <th>Сделано</th>
-        <th>Описание</th>
-        <th>Удалить</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Список задач будет тут -->
-    </tbody>
-  </table>
-
-  <!-- Кнопка для очистки всех выполненных задач -->
-  <button id="clear-completed-btn" class="clear-completed-btn">Удалить все выполненные</button>
-</div>
-
 
   <script src="script.js"></script>
 </body>
