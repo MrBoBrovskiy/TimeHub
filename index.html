@@ -50,6 +50,22 @@
     </div>
   </div>
 
+    <!-- Калькулятор просрочки -->
+<div class="deadline-section">
+  <h2>Дедлайн отгрузки</h2>
+
+  <div class="deadline-form">
+    <input type="date"   id="pay-date">
+    <select id="work-days">
+      <option value="20">+20&nbsp;раб. дн.</option>
+      <option value="30">+30&nbsp;раб. дн.</option>
+    </select>
+    <button id="deadline-btn" class="primary">Рассчитать</button>
+  </div>
+
+  <p>Дедлайн: <span id="deadline-out">—</span></p>
+</div>
+
   <!-- Правая колонка (Задачи на сегодня) -->
   <div class="right-column">
     <div class="tasks-section">
@@ -79,6 +95,9 @@
   </div>
 </div>
 
-  <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+<script defer src="script.js"></script>
+
+
 </body>
 </html>

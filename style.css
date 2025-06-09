@@ -102,6 +102,42 @@ button:disabled {
   cursor: not-allowed;
 }
 
+
+.deadline-section{
+  background:var(--container-bg);
+  border-radius:var(--radius);
+  box-shadow:var(--box-shadow);
+  padding:20px;
+  margin-top:20px;
+  text-align:center;
+}
+.deadline-form{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.deadline-form input,
+.deadline-form select{
+  padding:10px;
+  border:1px solid var(--border-color);
+  border-radius:var(--radius);
+  background:var(--bg-color);
+  color:var(--text-color);
+}
+.primary{
+  background:var(--accent-color);
+  color:#000;
+  border:none;
+  border-radius:var(--radius);
+  padding:10px 15px;
+  cursor:pointer;
+  box-shadow:var(--box-shadow);
+}
+.primary:hover{background:#ffac33;}
+
+
+
 /* ---------------------------
    Таймеры (timer-section)
 ----------------------------*/

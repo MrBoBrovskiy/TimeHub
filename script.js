@@ -330,3 +330,54 @@ calcInput.addEventListener('input', () => {
   calcOneThird.textContent = (num / 3).toFixed(0);
   calcTwoThirds.textContent = ((2 * num) / 3).toFixed(0);
 });
+
+
+
+/*****  Дедлайн-калькулятор без плагина  *****/
+
+// 1. список федеральных праздников (2025)
+const RU_HOLIDAYS = new Set([
+  '2025-01-01','2025-01-02','2025-01-03','2025-01-04',
+  '2025-01-05','2025-01-06','2025-01-07',
+  '2025-02-23',
+  '2025-03-08',
+  '2025-05-01','2025-05-09',
+  '2025-06-12',
+  '2025-11-04'
+]);
+// 2. утилита: рабочий ли день?
+function isBusinessDay(d){
+  const dow = d.day();              // 0 = вс, 6 = сб
+  if (dow === 0 || dow === 6) return false;
+  return !RU_HOLIDAYS.has(d.format('YYYY-MM-DD'));
+}
+
+// 3. добавляем N рабочих дней (день оплаты входит)
+function addBusinessDays(start, n){
+  let d = start.clone();
+  let count = isBusinessDay(d) ? 1 : 0;   // день оплаты учитываем
+  while (count < n){
+    d = d.add(1, 'day');
+    if (isBusinessDay(d)) count++;
+  }
+  return d;
+}
+
+/* ---------- DOM ---------- */
+const payDate     = document.getElementById('pay-date');
+const daysSel     = document.getElementById('work-days');
+const btnCalc     = document.getElementById('deadline-btn');
+const out         = document.getElementById('deadline-out');
+
+/* ---------- обработчик ---------- */
+btnCalc.addEventListener('click', () => {
+  const native = payDate.valueAsDate;           // Date-объект или null
+  if (!native){ out.textContent = '—'; return; }
+
+  const start = dayjs(native);                  // dayjs-объект
+  const n     = +daysSel.value;                 // 20 или 30
+  const dl    = addBusinessDays(start, n);
+
+  out.textContent = dl.format('DD.MM.YYYY');
+});
+
